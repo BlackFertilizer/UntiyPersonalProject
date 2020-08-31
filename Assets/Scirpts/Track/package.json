@@ -1,0 +1,10 @@
+﻿{
+"name": "com.coffee.Track-me",
+"displayName": "Track Me",
+"description": "Track the object!",
+"version": "1.0.0",
+"unity": "2019.3",
+"license": "MIT",
+"dependencies": {
+ }
+}
