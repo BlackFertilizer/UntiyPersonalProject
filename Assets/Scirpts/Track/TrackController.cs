@@ -2,102 +2,112 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class TrackController : MonoBehaviour
+namespace Track
 {
-    public Transform moveObjectTran;
-    private Animator animator;
-    AnimatorManager animatorManager;
-  
-    public PointInfo[] arrayPoint;
-    private LinkedList<PointInfo> pointList;
-    private LinkedListNode<PointInfo> currentPointNode;
-    private PointInfo currentPointInfo;
-    
-    Vector3 currentSpeed;
-    public Vector3 CurrentSpeed
+    public class TrackController : MonoBehaviour
     {
-        set{currentSpeed  = value;}
-        get{return currentSpeed;}
-    }
+        public Transform moveObjectTran;
+        [HideInInspector]
+        public Animator animator;
+        // public TrackAnimatorManager animatorManager;
 
-    Vector3 currentAccelerate;
+        public PointManager[] arrayPointMgr;
+        private LinkedList<PointManager> pointList;
+        private LinkedListNode<PointManager> currentPointNode;
+        private PointInfo currentPointInfo;
 
-    Action<Transform> updatePositionAction;
-
-    void Start()
-    {
-        animator = moveObjectTran.GetComponent<Animator>();
-        animatorManager = new AnimatorManager(animator);
-        pointList = new LinkedList<PointInfo>(arrayPoint);
-        
-        
-        #region  //初始化第一个点
-        currentPointNode = pointList.First;
-        currentPointInfo = currentPointNode.Value;
-        if(!string.IsNullOrEmpty(currentPointInfo.animationName))
+        Vector3 currentSpeed;
+        public Vector3 CurrentSpeed
         {
-            animatorManager.playAnimationFade(currentPointInfo.animationName, currentPointInfo.animationFadeTime);
+            set { currentSpeed = value; }
+            get { return currentSpeed; }
         }
-        GetUpdateAction();
-        #endregion
 
-    }
+        Action<Transform> updatePositionAction;
+        public Action<bool> animatorNotify;
 
-
-    void Update()
-    {
-        if(updatePositionAction != null)
+        void OnEnable() 
         {
-            updatePositionAction(moveObjectTran);
+            animator = moveObjectTran.GetComponent<Animator>();
+            // animatorManager = new TrackAnimatorManager(animator);
+            pointList = new LinkedList<PointManager>(arrayPointMgr);
         }
-    }
 
-
-    //切换到下个定位点
-    public void turnToNextPoint()
-    {
-        if (currentPointNode.Next != null)
+        void Start() 
         {
-            currentPointNode = currentPointNode.Next;
-            currentPointInfo = currentPointNode.Value;
-
-            if(!string.IsNullOrEmpty(currentPointInfo.animationName))
-            {
-                animatorManager.playAnimationFade(currentPointInfo.animationName, currentPointInfo.animationFadeTime);
-            }
-
+            #region  //初始化第一个点
+            currentPointNode = pointList.First;
+            currentPointInfo = currentPointNode.Value.GetPointInfo();
             GetUpdateAction();
+            #endregion
+
         }
-        else
+
+        void Update()
         {
-            updatePositionAction = null;
-            currentPointNode = null;
+            if (updatePositionAction != null)
+            {
+                updatePositionAction(moveObjectTran);
+            }
+        }
+
+
+        //切换到下个定位点
+        public void turnToNextPoint()
+        {
+            //当前节点下 所有的PointInfo 都执行结束
+            currentPointInfo = currentPointNode.Value.GetPointInfo();
+            if (currentPointInfo == null)
+            {
+                if (currentPointNode.Next != null)
+                {
+                    currentPointNode = currentPointNode.Next;
+                    currentPointInfo = currentPointNode.Value.GetPointInfo();
+                    GetUpdateAction();
+                }
+                else
+                {
+                    updatePositionAction = null;
+                    currentPointNode = null;
+                }
+            }
+            else
+            {
+                GetUpdateAction();
+            }
+        }
+
+        private void GetUpdateAction()
+        {
+            switch (currentPointInfo.pointType)
+            {
+                case PointType.DelayPoint:
+                    updatePositionAction = new PointBehaviourDelay(this, currentPointInfo).forceChangePostion;
+                    break;
+                case PointType.PassPoint:
+                    updatePositionAction = new PointBehaviourForce(this, currentPointInfo).forceChangePostion;
+                    break;
+                case PointType.RotatePoint:
+                    updatePositionAction = null;
+                    break;
+                case PointType.PatrolPoint:
+                    updatePositionAction = null;
+                    break;
+                default:
+                    updatePositionAction = null;
+                    break;
+            }
+        }
+
+
+        public void Pause()
+        {
+            animatorNotify(true);
+        }
+
+        public void Continue()
+        {
+            animatorNotify(false);
         }
     }
-
-
-
-    private void GetUpdateAction()
-    {
-        switch(currentPointInfo.pointType)
-        {
-            case PointType.DelayPoint:
-                updatePositionAction = new PointBehaviourDelay(this, currentPointInfo).forceChangePostion;
-                break;
-            case PointType.PassPoint:
-                updatePositionAction = new PointBehaviourForce(this, currentPointInfo).forceChangePostion;
-                break;
-            case PointType.RotatePoint:
-                updatePositionAction = null;
-                break;
-            case PointType.PatrolPoint:
-                updatePositionAction = null;
-                break;
-            default:
-                updatePositionAction = null;
-            break;
-        }
-    }
-
 }

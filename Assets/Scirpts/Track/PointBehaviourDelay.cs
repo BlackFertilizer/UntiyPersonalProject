@@ -1,37 +1,30 @@
 using UnityEngine;
 
-
-
-public class PointBehaviourDelay : PointBehaviour
+namespace Track
 {
-    TrackController trackController;
-    private float delayTime;
-
-    private PointBehaviourForce pointBehaviourForce;
-
-/// <summary>
-/// 在该点等待 xxx秒后，开始移动到下个点
-/// </summary>
-    public PointBehaviourDelay(TrackController trackController, PointInfo pointInfo)
+    public class PointBehaviourDelay : PointBehaviour
     {
-        pointBehaviourForce = new PointBehaviourForce(trackController, pointInfo);
-        this.trackController = trackController;
-        this.delayTime = pointInfo.delayTime;
-    }
+        private float delayTime;
 
-//切换到下一个点的动作
-    public override void forceChangePostion(Transform moveObjectTran)
-    {
-        if(pointBehaviourForce.CanRunning)
+        /// <summary>
+        /// 在该点等待 xxx秒后，开始移动到下个点
+        /// </summary>
+        public PointBehaviourDelay(TrackController trackController, PointInfo pointInfoTmp)
         {
-            pointBehaviourForce.forceChangePostionEndOrNot(moveObjectTran);
+            baseInit(trackController, pointInfoTmp);
+            delayTime = pointInfoTmp.delayTime;
         }
-        else
+
+        //切换到下一个点的动作
+        public override void forceChangePostion(Transform moveObjectTran)
         {
-            delayTime -= Time.deltaTime;
-            if(delayTime < 0)
+            if (isRunning)
             {
-                trackController.turnToNextPoint();
+                delayTime -= Time.deltaTime;
+                if (delayTime < 0)
+                {
+                    endAction();
+                }
             }
         }
     }

@@ -52,12 +52,13 @@
      <Compile Include="Assets\Scirpts\POi\STXRArt_POI_TextureImportCheck.cs" />
      <Compile Include="Assets\Scirpts\POi\XRStudio_PrefabRedirectAuto.cs" />
      <Compile Include="Assets\Scirpts\POi\XRStudio_PrefabRedirectHand.cs" />
-     <Compile Include="Assets\Scirpts\Track\AnimatorManager.cs" />
+     <Compile Include="Assets\Scirpts\Track\InteractController.cs" />
      <Compile Include="Assets\Scirpts\Track\PointBehaviour.cs" />
      <Compile Include="Assets\Scirpts\Track\PointBehaviourDelay.cs" />
      <Compile Include="Assets\Scirpts\Track\PointBehaviourForce.cs" />
-     <Compile Include="Assets\Scirpts\Track\PointInfo.cs" />
+     <Compile Include="Assets\Scirpts\Track\PointManager.cs" />
      <Compile Include="Assets\Scirpts\Track\TrackController.cs" />
+     <Compile Include="Assets\Scirpts\Track\TrackRayCast.cs" />
      <Compile Include="Assets\Scirpts\Triggers\ArtStudio_AnimatorTrigger.cs" />
      <Compile Include="Assets\Scirpts\Triggers\ArtStudio_AudioTrigger.cs" />
      <Compile Include="Assets\Scirpts\Triggers\ArtStudio_BaseTrigger.cs" />
@@ -68,7 +69,6 @@
      <None Include="Assets\Shadows\Shaders\PassShadowPlanar.shader" />
      <None Include="Assets\Shadows\Shaders\PlanarShadow.shader" />
      <None Include="Assets\Shadows\Shaders\CustomInvisiable.shader" />
-     <None Include="Assets\Scirpts\Track\NewAssemblyReference.asmref" />
      <None Include="Assets\Shadows\Shaders\ShaderShadow_1.shader" />
     <Reference Include="UnityEngine">
         <HintPath>/Applications/Unity/2019.4.1f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>

@@ -36,13 +36,14 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scirpts\Track\AnimatorManager.cs" />
      <Compile Include="Assets\Scirpts\Track\Editor\PointEditor.cs" />
      <Compile Include="Assets\Scirpts\Track\PointBehaviour.cs" />
      <Compile Include="Assets\Scirpts\Track\PointBehaviourDelay.cs" />
      <Compile Include="Assets\Scirpts\Track\PointBehaviourForce.cs" />
      <Compile Include="Assets\Scirpts\Track\PointInfo.cs" />
+     <Compile Include="Assets\Scirpts\Track\TrackAnimatorManager.cs" />
      <Compile Include="Assets\Scirpts\Track\TrackController.cs" />
+     <Compile Include="Assets\Scirpts\Track\TrackRayCast.cs" />
      <None Include="Assets\Scirpts\Track\Track.asmdef" />
     <Reference Include="UnityEngine">
         <HintPath>/Applications/Unity/2019.4.1f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
