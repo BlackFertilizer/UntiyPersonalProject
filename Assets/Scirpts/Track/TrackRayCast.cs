@@ -7,10 +7,15 @@ namespace Track
     public class TrackRayCast : MonoBehaviour
     {
         private const string kKeyName = @"Fire1";
-        private Camera camera;
+        private Camera camera_;
 
         private void Start() {
-            camera = Camera.main;
+            camera_ = this.GetComponent<Camera>();
+            if(camera_ == null)
+            {
+                Debug.LogError("camera == null");
+                Destroy(this);
+            }
         }
 
         void Update()
@@ -20,7 +25,7 @@ namespace Track
             if (Input.GetButtonDown(kKeyName))
             {
 
-                Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+                Ray ray = camera_.ScreenPointToRay(Input.mousePosition);
 
                 RaycastHit hitInfo;
                 if (Physics.Raycast(ray, out hitInfo, 100))

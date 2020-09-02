@@ -12,11 +12,12 @@ namespace Track
         public PointBehaviourDelay(TrackController trackController, PointInfo pointInfoTmp)
         {
             baseInit(trackController, pointInfoTmp);
+            trackController.CurrentSpeed = trackController.moveObjectTran.forward * 0.05f;
             delayTime = pointInfoTmp.delayTime;
         }
 
         //切换到下一个点的动作
-        public override void forceChangePostion(Transform moveObjectTran)
+        public override void forceChangePostion()
         {
             if (isRunning)
             {

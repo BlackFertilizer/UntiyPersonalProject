@@ -7,6 +7,7 @@ namespace Track
     public class PointBehaviourForce : PointBehaviour
     {
         public PointInfo point;
+        Transform moveObjectTran;
 
         ///<summary>
         ///外力改变运动方向
@@ -14,10 +15,11 @@ namespace Track
         public PointBehaviourForce(TrackController trackController, PointInfo pointInfo)
         {
             this.point = pointInfo;
+            moveObjectTran = trackController.moveObjectTran;
             baseInit(trackController, pointInfo);
         }
 
-        public override void forceChangePostion(Transform moveObjectTran)
+        public override void forceChangePostion()
         {
             if (!isRunning)
             {
@@ -25,6 +27,13 @@ namespace Track
             }
 
             Vector3 displacement = point.transform.position - moveObjectTran.position;
+
+            //当物体运动到目标范围，开始寻找下一个目标点
+            if (displacement.magnitude < point.touchRange)
+            {
+                endAction();
+            }
+
             //计算加速度
             Vector3 accelebrate = getAccelebrate(displacement, point.accelerateValue);
             //计算速度
@@ -37,11 +46,7 @@ namespace Track
             moveObjectTran.forward = new Vector3(speed.x, 0, speed.z);
             moveObjectTran.position += speed;
 
-            //当物体运动到目标范围，开始寻找下一个目标点
-            if (displacement.magnitude < point.touchRange)
-            {
-                endAction();
-            }
+
         }
 
         //获取加速度

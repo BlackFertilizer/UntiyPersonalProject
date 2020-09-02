@@ -13,12 +13,13 @@ namespace Track
         private float animationFadeTime;
         protected bool isRunning;
 
-        public abstract void forceChangePostion(Transform moveObjectTran);
+        public abstract void forceChangePostion();
 
         public void baseInit(TrackController trackController, PointInfo pointInfo)
         {
             this.trackController = trackController;
             this.trackController.animatorNotify += receiveNotify;
+
 
             animator = trackController.animator;
             animationName = pointInfo.animationName;
@@ -28,7 +29,7 @@ namespace Track
 
         public void receiveNotify(bool isrunning)
         {
-            Debug.Log("Switch = " + isrunning);
+            //Debug.Log("Switch = " + isrunning);
             isRunning = isrunning;
             if (isRunning)
             {

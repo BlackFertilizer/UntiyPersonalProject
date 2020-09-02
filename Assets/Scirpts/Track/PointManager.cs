@@ -60,8 +60,13 @@ namespace Track
                 pointList[index - 1].transform = this.transform;
                 return pointList[index - 1];
             }
+            else
+            {
+                index = 0;
+                return null;
+            }
 
-            return null;
+            
         }
 
     }

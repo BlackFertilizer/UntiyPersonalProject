@@ -10,12 +10,15 @@ namespace Track
     {
         public string name;
         public float fadeTime;
+        public AudioClip audioClip;
     }
 
     public class InteractController : MonoBehaviour
     {
         public TrackController trackController;
+
         Animator animator;
+        AudioSource audioSource;
 
         [SerializeField]
         public List<MotionInfo> motionInfos;
@@ -23,57 +26,87 @@ namespace Track
         private int index;
         private int count;
 
-        void Start() 
-        {
-            animator = this.transform.GetComponent<Animator>();
+        private bool isPlaying;
 
-            if(motionInfos == null || motionInfos.Count == 0)
+        private void OnEnable()
+        {
+            index = -1;
+            isPlaying = false;
+            animator = transform.GetComponent<Animator>();
+            audioSource = transform.GetComponent<AudioSource>();
+
+            if (motionInfos == null || motionInfos.Count == 0)
             {
                 Debug.LogError("animation count == 0 !!!!");
                 Destroy(this);
             }
-            
-            index = 0;
+
             count = motionInfos.Count;
         }
-        
+
+
         public void play()
         {
-            if(index >= count)
+            Debug.Log("play" + isPlaying);
+            if (!isPlaying)
             {
-                index = 0;
-            }
+                index++;
+                if (index == count)
+                {
+                    index = 0;
+                }
 
-            playAnimationFade(motionInfos[index].name, motionInfos[index].fadeTime);
-            index ++; 
+                playAnimationFade(motionInfos[index].name, motionInfos[index].fadeTime);
+                if (audioSource != null && motionInfos[index].audioClip != null)
+                {
+                    audioSource.clip = motionInfos[index].audioClip;
+                    audioSource.Play();
+                }
+            }
         }
 
-        
-        private void Update() 
+
+        void Update()
         {
-            if(animator.GetCurrentAnimatorStateInfo(0).IsName("ready_walk") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
+            if (isPlaying)
             {
-                stop();
+                if (animator.GetCurrentAnimatorStateInfo(0).IsName(motionInfos[index].name) && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.99)
+                {
+                    Debug.Log("1");
+                    stop();
+                }
             }
+
         }
 
-        public void stop() 
+        public void stop()
         {
-           
-            if(trackController != null)
-                trackController.animatorNotify(true);
+            isPlaying = false;
+
+            if (trackController != null)
+            {
+                trackController.Continue();
+            }
+            else
+            {
+
+            }
+
         }
 
         private void playAnimationFade(string animationName, float fadeTime)
         {
-            if(trackController != null)
-                trackController.animatorNotify(false);
+            if (trackController != null)
+            {
+                trackController.Pause();
+            }
 
             if (animator != null)
-            {    
+            {
+                 isPlaying = true;
+                // animator.(animationName,true);
                 animator.CrossFade(animationName, fadeTime);
-                animator.GetCurrentAnimatorClipInfo(0);
-            }     
+            }
         }
 
 

@@ -11,10 +11,12 @@ namespace Track
         public Animator animator;
         // public TrackAnimatorManager animatorManager;
 
+        public bool isLoop;
+
         public PointManager[] arrayPointMgr;
         private LinkedList<PointManager> pointList;
         private LinkedListNode<PointManager> currentPointNode;
-        private PointInfo currentPointInfo;
+        private PointInfo currentPointInfo; 
 
         Vector3 currentSpeed;
         public Vector3 CurrentSpeed
@@ -23,8 +25,8 @@ namespace Track
             get { return currentSpeed; }
         }
 
-        Action<Transform> updatePositionAction;
-        public Action<bool> animatorNotify;
+        Action updatePositionAction;
+        public Action<bool>  animatorNotify;
 
         void OnEnable() 
         {
@@ -47,7 +49,7 @@ namespace Track
         {
             if (updatePositionAction != null)
             {
-                updatePositionAction(moveObjectTran);
+                updatePositionAction();
             }
         }
 
@@ -67,8 +69,19 @@ namespace Track
                 }
                 else
                 {
-                    updatePositionAction = null;
-                    currentPointNode = null;
+                    //如果需要循环播放
+                    if(isLoop)
+                    {
+                        currentPointNode = pointList.First;
+                        currentPointInfo = currentPointNode.Value.GetPointInfo();
+                        GetUpdateAction();
+                    }
+                    else
+                    {
+                        updatePositionAction = null;
+                        currentPointNode = null;
+                    }
+
                 }
             }
             else
@@ -102,12 +115,13 @@ namespace Track
 
         public void Pause()
         {
-            animatorNotify(true);
+            animatorNotify(false);
+            currentSpeed = currentSpeed.normalized*0.01f;
         }
 
         public void Continue()
         {
-            animatorNotify(false);
+            animatorNotify(true);
         }
     }
 }
