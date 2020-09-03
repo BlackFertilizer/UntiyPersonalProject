@@ -47,7 +47,7 @@ namespace Track
 
         public void play()
         {
-            Debug.Log("play" + isPlaying);
+            // Debug.Log("play" + isPlaying);
             if (!isPlaying)
             {
                 index++;
@@ -72,7 +72,7 @@ namespace Track
             {
                 if (animator.GetCurrentAnimatorStateInfo(0).IsName(motionInfos[index].name) && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.99)
                 {
-                    Debug.Log("1");
+                    // Debug.Log("1");
                     stop();
                 }
             }

@@ -36,11 +36,6 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Local\Scripts\LookAtCamera.cs" />
-     <Compile Include="Assets\Local\Scripts\POIParse.cs" />
-     <Compile Include="Assets\Local\Scripts\ProfileCheck.cs" />
-     <Compile Include="Assets\Local\Scripts\ScrollCircle.cs" />
-     <Compile Include="Assets\Local\Scripts\SimpleCameraController.cs" />
      <Compile Include="Assets\Scirpts\LanternFactory\Lantern.cs" />
      <Compile Include="Assets\Scirpts\LanternFactory\LanternFactory.cs" />
      <Compile Include="Assets\Scirpts\LanternFactory\LanternManager.cs" />
@@ -52,13 +47,12 @@
      <Compile Include="Assets\Scirpts\POi\STXRArt_POI_TextureImportCheck.cs" />
      <Compile Include="Assets\Scirpts\POi\XRStudio_PrefabRedirectAuto.cs" />
      <Compile Include="Assets\Scirpts\POi\XRStudio_PrefabRedirectHand.cs" />
-     <Compile Include="Assets\Scirpts\Track\InteractController.cs" />
-     <Compile Include="Assets\Scirpts\Track\PointBehaviour.cs" />
-     <Compile Include="Assets\Scirpts\Track\PointBehaviourDelay.cs" />
-     <Compile Include="Assets\Scirpts\Track\PointBehaviourForce.cs" />
-     <Compile Include="Assets\Scirpts\Track\PointManager.cs" />
-     <Compile Include="Assets\Scirpts\Track\TrackController.cs" />
-     <Compile Include="Assets\Scirpts\Track\TrackRayCast.cs" />
+     <Compile Include="Assets\Scirpts\Tools\ColorPicker.cs" />
+     <Compile Include="Assets\Scirpts\Tools\LookAtCamera.cs" />
+     <Compile Include="Assets\Scirpts\Tools\POIParse.cs" />
+     <Compile Include="Assets\Scirpts\Tools\ProfileCheck.cs" />
+     <Compile Include="Assets\Scirpts\Tools\ScrollCircle.cs" />
+     <Compile Include="Assets\Scirpts\Tools\SimpleCameraController.cs" />
      <Compile Include="Assets\Scirpts\Triggers\ArtStudio_AnimatorTrigger.cs" />
      <Compile Include="Assets\Scirpts\Triggers\ArtStudio_AudioTrigger.cs" />
      <Compile Include="Assets\Scirpts\Triggers\ArtStudio_BaseTrigger.cs" />
@@ -66,9 +60,14 @@
      <Compile Include="Assets\Scirpts\Triggers\ArtStudio_EventTrigger.cs" />
      <Compile Include="Assets\Scirpts\Triggers\Ray\ArtStudio_Camera_RayUtils.cs" />
      <Compile Include="Assets\Scirpts\Triggers\Ray\IRayTrigger.cs" />
+     <None Include="Assets\Shaders\CustomXianhe.shader" />
+     <None Include="Assets\Shaders\LookAt.shader" />
      <None Include="Assets\Shadows\Shaders\PassShadowPlanar.shader" />
+     <None Include="Assets\Shaders\CustomAnimals.shader" />
      <None Include="Assets\Shadows\Shaders\PlanarShadow.shader" />
      <None Include="Assets\Shadows\Shaders\CustomInvisiable.shader" />
+     <None Include="Assets\Shadows\Shaders\ShadowUnderFoot.shader" />
+     <None Include="Assets\Shaders\DMBillBoard.shader" />
      <None Include="Assets\Shadows\Shaders\ShaderShadow_1.shader" />
     <Reference Include="UnityEngine">
         <HintPath>/Applications/Unity/2019.4.1f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
@@ -615,6 +614,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Track.csproj">
+      <Project>{6f356be7-ddf1-ba8e-9ada-b96f215ea572}</Project>
+      <Name>Track</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
     <ProjectReference Include="Unity.Timeline.Editor.csproj">
       <Project>{288e4667-7ff7-b487-81f6-cb4d7179767e}</Project>
       <Name>Unity.Timeline.Editor</Name>

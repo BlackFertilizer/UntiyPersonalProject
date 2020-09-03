@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/animatorScene.unity
+- path: Assets/Scenes/realCodeMotionScene.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

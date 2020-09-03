@@ -32,6 +32,7 @@ namespace Track
             if (displacement.magnitude < point.touchRange)
             {
                 endAction();
+                return;
             }
 
             //计算加速度

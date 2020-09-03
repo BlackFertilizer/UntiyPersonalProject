@@ -12,7 +12,7 @@ namespace Track
         public PointBehaviourDelay(TrackController trackController, PointInfo pointInfoTmp)
         {
             baseInit(trackController, pointInfoTmp);
-            trackController.CurrentSpeed = trackController.moveObjectTran.forward * 0.05f;
+            trackController.CurrentSpeed = trackController.moveObjectTran.forward * 0.01f;
             delayTime = pointInfoTmp.delayTime;
         }
 
@@ -25,6 +25,7 @@ namespace Track
                 if (delayTime < 0)
                 {
                     endAction();
+                    return;
                 }
             }
         }
