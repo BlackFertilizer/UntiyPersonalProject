@@ -7,35 +7,50 @@ namespace Track
     {
         None,
         DelayPoint,
-        PassPoint,
-        RotatePoint,
+        AttractPoint,
+        SelfControlPoint,
         PatrolPoint,
     }
 
     [Serializable]
     public class PointInfo
     {
-        public PointType pointType = PointType.None;
-
         [HideInInspector]
         public Transform transform;
 
-        public float maxSpeed;
-        public float accelerateValue;
-
         //如果在接触范围，就会寻找下一个点位
-        public float touchRange;
-
         public string animationName = "None";
-
         public float animationFadeTime = 0;
 
+        public PointType pointType = PointType.None;
+
+
+        [Header("Attract Point 的参数设置")] 
+#region  外力的方式移动
+        public float maxSpeed;
+
+        public float maxAccelerateValue;
+        public float accelerateValue;
+        public float touchRange;
+        public float rotateFadeTime = 2;
+        public float animatorSpeedRate = 1;
+
+        //缓慢停止
+        public bool openFadeStop = false;
+        public float fadeStopLength = 0;
+        public float fadeMinSpeed = 0.5f;
+#endregion
+
+        ///delay point
+        [Header("Delay Point 的参数设置")]
         public float delayTime;
+        public float saveLastSpeed = 0;
     }
 
 
     public class PointManager : MonoBehaviour
     {
+        [Header("每个点默认有引力 可以添加延迟等行为")]
         [SerializeField]
         public List<PointInfo> pointList;
 
@@ -68,6 +83,27 @@ namespace Track
 
             
         }
+
+
+        #region  used in Editor 
+
+        private void Init()
+        {
+            if(pointList == null)
+                pointList= new List<PointInfo>();
+        }
+
+        public void addPointInfo()
+        {
+            Init();
+            pointList.Add(new PointInfo());
+        }
+
+        public void removePointInfo(PointInfo pointInfo)
+        {
+            pointList.Remove(pointInfo);
+        }
+        #endregion
 
     }
 

@@ -6,23 +6,25 @@ namespace Track
 {
     public class TrackController : MonoBehaviour
     {
-        public Transform moveObjectTran;
+        public Transform targetObjectTran;
         [HideInInspector]
         public Animator animator;
         // public TrackAnimatorManager animatorManager;
 
+        [Header("是否沿路径，循环运动")]
         public bool isLoop;
 
+        [Header("路径上每个控制点的信息")]
         public PointManager[] arrayPointMgr;
         private LinkedList<PointManager> pointList;
         private LinkedListNode<PointManager> currentPointNode;
         private PointInfo currentPointInfo; 
 
-        Vector3 currentSpeed;
-        public Vector3 CurrentSpeed
+        Vector3 currentVelocity;
+        public Vector3 CurrentVelocity
         {
-            set { currentSpeed = value; }
-            get { return currentSpeed; }
+            set { currentVelocity = value; }
+            get { return currentVelocity; }
         }
 
         Action updatePositionAction;
@@ -30,9 +32,10 @@ namespace Track
 
         void OnEnable() 
         {
-            animator = moveObjectTran.GetComponent<Animator>();
+            animator = targetObjectTran.GetComponent<Animator>();
             // animatorManager = new TrackAnimatorManager(animator);
             pointList = new LinkedList<PointManager>(arrayPointMgr);
+            currentVelocity = Vector3.zero;
         }
 
         void Start() 
@@ -97,11 +100,11 @@ namespace Track
                 case PointType.DelayPoint:
                     updatePositionAction = new PointBehaviourDelay(this, currentPointInfo).forceChangePostion;
                     break;
-                case PointType.PassPoint:
+                case PointType.AttractPoint:
                     updatePositionAction = new PointBehaviourForce(this, currentPointInfo).forceChangePostion;
                     break;
-                case PointType.RotatePoint:
-                    updatePositionAction = null;
+                case PointType.SelfControlPoint:
+                    updatePositionAction = new PointBehaviourSelfControl(this, currentPointInfo).forceChangePostion;
                     break;
                 case PointType.PatrolPoint:
                     updatePositionAction = null;
@@ -115,13 +118,15 @@ namespace Track
 
         public void Pause()
         {
-            animatorNotify(false);
-            currentSpeed = currentSpeed.normalized*0.01f;
+            if(animatorNotify != null)
+                animatorNotify(false);
+            currentVelocity = Vector3.zero;//currentSpeed.normalized*0.01f;
         }
 
         public void Continue()
-        {
-            animatorNotify(true);
+        { 
+            if(animatorNotify != null)
+                animatorNotify(true);
         }
     }
 }

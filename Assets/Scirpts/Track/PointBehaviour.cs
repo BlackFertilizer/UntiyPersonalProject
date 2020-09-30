@@ -8,7 +8,7 @@ namespace Track
     {
         protected TrackController trackController;
 
-        private Animator animator;
+        protected Animator animator;
         private string animationName;
         private float animationFadeTime;
         protected bool isRunning;
@@ -19,30 +19,23 @@ namespace Track
         {
             this.trackController = trackController;
             this.trackController.animatorNotify += receiveNotify;
-
-
             animator = trackController.animator;
             animationName = pointInfo.animationName;
             animationFadeTime = pointInfo.animationFadeTime;
             receiveNotify(true);
         }
 
-        public void receiveNotify(bool isrunning)
+        public virtual void receiveNotify(bool isrunning)
         {
             //Debug.Log("Switch = " + isrunning);
             isRunning = isrunning;
             if (isRunning)
             {
-                playAnimator();
-            }
-        }
-
-        private void playAnimator()
-        {
-            if (!string.IsNullOrEmpty(animationName))
-            {
-                if (animator != null)
-                    animator.CrossFade(animationName, animationFadeTime);
+                if (!string.IsNullOrEmpty(animationName))
+                {
+                    if (animator != null)
+                        animator.CrossFade(animationName, animationFadeTime);
+                }
             }
         }
 

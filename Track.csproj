@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{6f356be7-ddf1-ba8e-9ada-b96f215ea572}</ProjectGuid>
+    <ProjectGuid>{29789aa4-d412-d8c4-5494-a9e3833604db}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Track</AssemblyName>
@@ -600,12 +600,12 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{8092acfe-9ba3-682f-2141-746c6f1715a4}</Project>
+      <Project>{8ec1bf82-2459-b3b2-3bf4-b5538b7658d0}</Project>
       <Name>UnityEditor.UI</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
     <ProjectReference Include="UnityEngine.UI.csproj">
-      <Project>{13e5427e-31f5-e2b5-dc4d-7c41540c329b}</Project>
+      <Project>{6669f265-2a38-7d50-c4ac-3ba641744a61}</Project>
       <Name>UnityEngine.UI</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>

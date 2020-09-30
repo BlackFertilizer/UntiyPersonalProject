@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{fa800765-c0d0-899f-f635-64103959072d}</ProjectGuid>
+    <ProjectGuid>{af2d74ec-1cf6-04fe-7f7f-c609e58a03fd}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
@@ -39,6 +39,7 @@
      <Compile Include="Assets\Scirpts\Editor\XRStudio_PrefabRedirectAuto.cs" />
      <Compile Include="Assets\Scirpts\Editor\XRStudio_PrefabRedirectForce.cs" />
      <Compile Include="Assets\Scirpts\Editor\XRStudio_PrefabRedirectHand.cs" />
+     <Compile Include="Assets\Scirpts\Track\Editor\PointInfoEditor.cs" />
      <Compile Include="Assets\Scirpts\Triggers\Editor\ArtStudio_AnimatorTriggerEditor.cs" />
      <Compile Include="Assets\Scirpts\Triggers\Editor\ArtStudio_AudioTriggerEditor.cs" />
      <Compile Include="Assets\Scirpts\Triggers\Editor\ArtStudio_EffectTriggerEditor.cs" />
@@ -246,7 +247,7 @@
         <HintPath>/Applications/Unity/2019.4.1f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
-        <HintPath>/Users/dongjianglong/Documents/Dongjianglong/UnityProjectTest/PersonalProject/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
+        <HintPath>/Users/dongjianglong/Documents/Dongjianglong/UnityFolder/UntiyPersonalProject/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
         <HintPath>/Applications/Unity/2019.4.1f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
@@ -611,67 +612,62 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{156bcfee-9049-ccdd-7010-f7236a5dc1d1}</Project>
+      <Project>{1b6b425c-387f-5238-fd49-2ddaac99f51c}</Project>
       <Name>Assembly-CSharp</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.TestRunner.csproj">
-      <Project>{04d29964-8795-5b9e-fc5e-e67e7babb23f}</Project>
+      <Project>{f15c6cc0-ea67-50a7-4e90-f77ba42507c5}</Project>
       <Name>UnityEditor.TestRunner</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
     <ProjectReference Include="UnityEngine.TestRunner.csproj">
-      <Project>{09d9b761-5e22-bdd4-ba8b-35f13d0e2a17}</Project>
+      <Project>{92899966-a440-bf4f-92cc-a207ed2d3d99}</Project>
       <Name>UnityEngine.TestRunner</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
-    <ProjectReference Include="Track.csproj">
-      <Project>{6f356be7-ddf1-ba8e-9ada-b96f215ea572}</Project>
-      <Name>Track</Name>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
     <ProjectReference Include="Unity.Timeline.Editor.csproj">
-      <Project>{288e4667-7ff7-b487-81f6-cb4d7179767e}</Project>
+      <Project>{2e4c3bfc-506a-46f5-6b16-ef7304843b2a}</Project>
       <Name>Unity.Timeline.Editor</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
     <ProjectReference Include="Unity.VSCode.Editor.csproj">
-      <Project>{06a41c47-8d14-8b31-1fc5-a3a399424fb1}</Project>
+      <Project>{589061a2-924d-2329-4375-bef2447ffe96}</Project>
       <Name>Unity.VSCode.Editor</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
     <ProjectReference Include="Unity.TextMeshPro.Editor.csproj">
-      <Project>{004e864a-153c-6986-8ee7-d390955303b6}</Project>
+      <Project>{c8d79d24-03b4-0418-1c92-545377d2e20f}</Project>
       <Name>Unity.TextMeshPro.Editor</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
     <ProjectReference Include="UnityEngine.UI.csproj">
-      <Project>{13e5427e-31f5-e2b5-dc4d-7c41540c329b}</Project>
+      <Project>{6669f265-2a38-7d50-c4ac-3ba641744a61}</Project>
       <Name>UnityEngine.UI</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
     <ProjectReference Include="Unity.Timeline.csproj">
-      <Project>{e2c5a8b8-5ce7-f10f-50d6-aed19ad3bfa8}</Project>
+      <Project>{69fb66b6-1115-af13-1bd2-a77572d248f1}</Project>
       <Name>Unity.Timeline</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
     <ProjectReference Include="Unity.CollabProxy.Editor.csproj">
-      <Project>{c7d44a86-6929-fc5f-a560-bac9be19ead8}</Project>
+      <Project>{e8280c69-3a21-b61a-70be-31241b1c17d1}</Project>
       <Name>Unity.CollabProxy.Editor</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
     <ProjectReference Include="Unity.Rider.Editor.csproj">
-      <Project>{2f1ac383-9a75-7009-746d-037f713e87de}</Project>
+      <Project>{7fa8c7bd-841d-d57f-dc54-38208ad659fc}</Project>
       <Name>Unity.Rider.Editor</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
     <ProjectReference Include="Unity.TextMeshPro.csproj">
-      <Project>{4b0ffa84-9b3b-1389-6637-db7ae19419d6}</Project>
+      <Project>{098bc534-c2f2-8d5e-2d1c-ebc68e16317d}</Project>
       <Name>Unity.TextMeshPro</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{8092acfe-9ba3-682f-2141-746c6f1715a4}</Project>
+      <Project>{8ec1bf82-2459-b3b2-3bf4-b5538b7658d0}</Project>
       <Name>UnityEditor.UI</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
